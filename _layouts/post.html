@@ -1,0 +1,16 @@
+---
+layout: default
+---
+{% if page.read %}{% assign mins = page.read %}{% else %}{% assign words = content | strip_html | number_of_words %}{% assign mins = words | divided_by: 200 | plus: 1 %}{% endif %}
+<article class="article">
+  <a class="back" href="{{ '/' | relative_url }}">&larr; All posts</a>
+  <h1>{{ page.title }}</h1>
+  <p class="byline">
+    <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d %B %Y" }}</time>
+    | {{ mins }} min read{% if page.tags.size > 0 %} | {{ page.tags | join: ", " }}{% endif %}
+  </p>
+  <div class="content">
+    {{ content }}
+  </div>
+  <p class="end"><a href="{{ '/' | relative_url }}">&larr; All posts</a></p>
+</article>

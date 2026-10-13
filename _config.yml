@@ -1,0 +1,15 @@
+title: Engineering Playbook
+description: How things actually work, end to end.
+url: "https://isthiscoder.github.io"
+baseurl: "/Engineering-Playbook"
+home_url: "https://mavsidd.carrd.co"
+author: Siddharth Singh
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+future: true          # posts dated today or later still show up
+
+exclude:
+  - README.md
+  - LICENSE
