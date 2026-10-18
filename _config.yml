@@ -2,7 +2,7 @@ title: Engineering Playbook
 description: How things actually work, end to end.
 url: "https://playbook.isidd.dev"
 baseurl: ""
-home_url: "https://mavsidd.carrd.co"
+home_url: "https://playbook.isidd.dev"
 author: Siddharth Singh
 
 markdown: kramdown
