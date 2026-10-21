@@ -1,3 +1,3 @@
 # Engineering Playbook
 
-End to end engineering concepts explained (how technology works).
+End to end Engineering Concepts Explained. I designed the Playbook in T shape where i cover broad topics with in depth Explanation. This Playbook is Designed for Students to Professionals who are curious about Technology. Go ahead with [Engineering Playbook](playbook.isidd.dev) (How Technology Works). Here's the [Projects](projects.isidd.dev) i Build get end to end explanation of [Projects Architecture](architecture.isidd.dev) (How i Build). Get [Projects Update](projects.isidd.dev/updates) Here.  Author & Dev - Siddharth Singh visit [Lab](https://isidd.dev) for Updates. MIT [LICENSE](LICENSE).
