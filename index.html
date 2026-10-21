@@ -1,20 +1,51 @@
 ---
 layout: default
 ---
-<p class="lede">End to end Engineering concept Explained (How Technology works).</p>
+{%- comment -%}
+  The list of headings. Newest first, 12 per page (set in _config.yml).
+  Page 1 is playbook.isidd.dev/, page 2 is /page2/, and so on.
+{%- endcomment -%}
+{%- assign start = paginator.page | minus: 1 | times: paginator.per_page -%}
+<header class="intro">
+  <h1 class="page-title">Engineering Playbook</h1>
+  <p class="lede">How technology actually works, explained end to end.</p>
+  <p class="count">{{ paginator.total_posts }} {% if paginator.total_posts == 1 %}entry{% else %}entries{% endif %}{% if paginator.total_pages > 1 %} · page {{ paginator.page }} of {{ paginator.total_pages }}{% endif %}</p>
+</header>
 
-<ul id="list">
-{% for post in site.posts %}
-  {% if post.read %}{% assign mins = post.read %}{% else %}{% assign words = post.content | strip_html | number_of_words %}{% assign mins = words | divided_by: 200 | plus: 1 %}{% endif %}
-  <li data-s="{{ post.title | downcase | escape }} {{ post.tags | join: ' ' | downcase | escape }} {{ post.date | date: '%-d %B %Y' | downcase }} {{ post.date | date: '%Y-%m-%d' }}">
-    <a class="post" href="{% if post.external %}{{ post.external }}{% else %}{{ post.url | relative_url }}{% endif %}">
-      <time class="date" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%-d %B %Y" }}</time>
-      <div>
-        <span class="name">{{ post.title }}</span>
-        <span class="meta">{{ mins }} min read{% if post.tags.size > 0 %} | {{ post.tags | join: ", " }}{% endif %}</span>
-      </div>
+<ol class="entries" id="list">
+  {%- for post in paginator.posts %}
+  {%- assign n = paginator.total_posts | minus: start | minus: forloop.index0 %}
+  <li>
+    <a class="entry" href="{{ post.url | relative_url }}">
+      <span class="num" aria-hidden="true">{% if n < 10 %}0{% endif %}{{ n }}</span>
+      <span class="e-body">
+        <span class="e-title">{{ post.title }}</span>
+        <span class="meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+          <span>{% include read-time.html post=post %}</span>
+          <span>{{ post.author | default: site.author }}</span>
+        </span>
+      </span>
     </a>
   </li>
-{% endfor %}
-</ul>
-<p id="none" class="none" hidden>Nothing found.</p>
+  {%- endfor %}
+</ol>
+<ul class="entries" id="results" hidden></ul>
+
+{%- if paginator.total_pages > 1 %}
+<nav class="pager" aria-label="Pages">
+  {%- if paginator.previous_page %}
+  <a class="newer" href="{{ paginator.previous_page_path | relative_url }}">&larr; Newer</a>
+  {%- else %}<span class="newer"></span>{% endif %}
+  <span class="pages">
+    {%- for i in (1..paginator.total_pages) %}
+      {%- if i == paginator.page %}<span aria-current="page">{{ i }}</span>
+      {%- elsif i == 1 %}<a href="{{ '/' | relative_url }}">1</a>
+      {%- else %}<a href="{{ site.paginate_path | replace: ':num', i | relative_url }}">{{ i }}</a>{% endif %}
+    {%- endfor %}
+  </span>
+  {%- if paginator.next_page %}
+  <a class="older" href="{{ paginator.next_page_path | relative_url }}">Older &rarr;</a>
+  {%- else %}<span class="older"></span>{% endif %}
+</nav>
+{%- endif %}
